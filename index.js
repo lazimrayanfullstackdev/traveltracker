@@ -47,7 +47,7 @@ app.post("/add", async (req, res) => {
   const userCountry = userCountry1.charAt(0).toUpperCase() + userCountry1.slice(1);
 
   try {
-    const result = await db.query("SELECT country_code FROM countries WHERE country_name = $1", [userCountry]);
+    const result = await db.query("SELECT country_code FROM countries WHERE country_name LIKE $1 || '%'", [userCountry]);
 
     if (result.rows.length !== 0) {
       const data = result.rows[0];
